@@ -1,3 +1,6 @@
+var counter = 0;
+var score = 0;
+var high = 0;
 // start slingin' some d3 here.
 var svg = d3.select("body")
             .append("svg")
@@ -47,9 +50,6 @@ var player = d3.select('svg')
                }).call(drag);
 
 
-var counter = 0;
-var score = 0;
-var high = 0;
 var detectCollision = function() {
   score++;
   d3.select(".high span").text(high);
@@ -58,12 +58,8 @@ var detectCollision = function() {
   for (var i = 0; i < enemies.length; i++) {
     var enemy = enemies[i];
     var playa = d3.select('.player')[0][0];
-    var enemyx = enemy.cx.baseVal.value;
-    var enemyy = enemy.cy.baseVal.value;
-    var playax = playa.cx.baseVal.value;
-    var playay = playa.cy.baseVal.value;
-    var x = playax - enemyx;
-    var y = playay - enemyy;
+    var x = playa.cx.baseVal.value - enemy.cx.baseVal.value;
+    var y = playa.cy.baseVal.value - enemy.cy.baseVal.value;
     var distance = Math.sqrt(x*x + y*y);
     if (distance < 25) {
       if (score > high) high = score;
